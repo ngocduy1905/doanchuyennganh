@@ -6,22 +6,36 @@
 
     $cat_id = $_GET['id'];
 
-    $sql = "delete from categories where cat_id = $cat_id";
+    $sql1 = "select *from products where product_cat = $cat_id";
 
-    $res = mysqli_query($con, $sql);
+    $res1 = mysqli_query($con, $sql1);
 
-    if($res == true) {
+    if($res1 == true){
+        $count = mysqli_num_rows($res1);
 
-        $_SESSION['delete'] = "Categories được xóa thành công!";
+        if($count > 0){
+            $_SESSION['delete'] = "Có khóa ngoại bên bảng product!";
 
-        header("location: categorieslist.php");
+            header("location: categorieslist.php");
+        }else{
+            $sql = "delete from categories where cat_id = $cat_id";
 
-    } else {
+            $res = mysqli_query($con, $sql);
 
-        $_SESSION['delete'] = "Xóa không thành công. Vui lòng thử lại!";
+            if($res == true) {
 
-        header("location:  categorieslist.php");
+            $_SESSION['delete'] = "Categories được xóa thành công!";
+
+            header("location: categorieslist.php");
+
+            } else {
+
+            $_SESSION['delete'] = "Xóa không thành công. Vui lòng thử lại!";
+
+            header("location:  categorieslist.php");
 
         
+            }
+        }
     }
 ?>

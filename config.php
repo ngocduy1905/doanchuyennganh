@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-// initializing variables
+// khởi tạo các biến
 $username = "";
 $email    = "";
 $errors = array(); 
@@ -17,7 +17,7 @@ if (!$db) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// REGISTER USER
+// REGISTER USER (kiểm tra đăng ký cho người dùng)
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
   $username = mysqli_real_escape_string($db, $_POST['username']);

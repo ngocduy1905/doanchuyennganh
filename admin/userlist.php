@@ -55,8 +55,6 @@ include "topheader.php";
                   <table class="table tablesorter " id="page1">
                     <thead class=" text-primary">
                       <tr><th></th><th>
-                     
-	<a class=" btn btn-primary" href="adduser.php">Thêm người dùng</a></th></tr></thead>
                     <tbody>
                       <?php 
 

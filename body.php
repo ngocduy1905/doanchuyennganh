@@ -7,6 +7,7 @@
    
 
     <!-- Wrapper for slides -->
+	<!--lấy banner cho trang index -->
     <div class="carousel-inner">
 
       <div class="item active">

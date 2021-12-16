@@ -2,6 +2,15 @@
 session_start();
 include("../db.php");
 
+$sql='select * from brands';
+$objStatement= $objPDO->prepare($sql);
+$objStatement->execute();
+$dataThuonghieu = $objStatement->fetchAll(PDO::FETCH_OBJ);
+
+$sql='select * from categories';
+$objStatement= $objPDO->prepare($sql);
+$objStatement->execute();
+$dataLoai = $objStatement->fetchAll(PDO::FETCH_OBJ);
 
 if(isset($_POST['btn_save']))
 {
@@ -126,13 +135,33 @@ include "topheader.php";
                       <div class="form-group">
                         <label>Loại sản phẩm (1:quần áo |2:quần áo nữ | 3:quần áo nam | 4:áo khoác nam | 5:áo vest nam | 6:áo sơ mi nam | 7:áo thun nam)</label>
                         <br/>
-                        <input type="number" id="product_type" name="product_type" required="[1-6]" class="form-control">
+
+                        <select id="product_type" name="product_type" class="form-control">
+                        <?php 
+                        foreach($dataLoai as $r)
+                        {
+                            ?>
+                            <option value="<?php echo $r->cat_id ?>"><?php echo $r->cat_title ?></option>
+                            <?php
+                        }
+                        ?>
+                        </select> <br>
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="">Thương hiệu sản phẩm (1: gucci , 2:chanel , 3:mango )</label>
-                        <input type="number" id="brand" name="brand" required class="form-control">
+                        
+                        <select id="brand" name="brand" class="form-control">
+                        <?php 
+                        foreach($dataThuonghieu as $r)
+                        {
+                            ?>
+                            <option value="<?php echo $r->brand_id ?>"><?php echo $r->brand_title ?></option>
+                            <?php
+                        }
+                        ?>
+                        </select> <br>
                       </div>
                     </div>                 
                     <div class="col-md-12">

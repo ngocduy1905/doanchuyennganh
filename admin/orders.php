@@ -40,7 +40,7 @@ include "topheader.php";
                 <div class="table-responsive ps">
                   <table class="table table-hover tablesorter " id="">
                     <thead class=" text-primary">
-                      <tr><th>Customer Name</th><th>Products</th><th>Contact | Email</th><th>Address</th><th>Details</th><th>Shipping</th><th>Time</th>
+                      <tr><th>Customer Name</th><th>Products</th><th>Contact | Email</th><th>Address|zip|country</th><th>Details</th><th></th><th>qty</th>
                     </tr></thead>
                     <tbody>
                       <?php 
@@ -48,11 +48,26 @@ include "topheader.php";
 
                         while(list($order_id,$p_names,$cus_name,$contact_no,$email,$address,$country,$details,$zip_code,$time,$quantity)=mysqli_fetch_array($result))
                         {	
-                        echo "<tr><td>$cus_name</td><td>$p_names</td><td>$email<br>$contact_no</td><td>$address<br>ZIP: $zip_code<br>$country</td><td>$details</td><td>$quantity</td><td>$time</td>
-
-                        <td>
-                        <a class=' btn btn-danger' href='orders.php?order_id=$order_id&action=delete'>Delete</a>
-                        </td></tr>";
+                        ?>
+                        <tr>
+                          <td><?php echo $cus_name ?></td>
+                          <td><?php echo $p_names ?></td>
+                          <td><?php echo $email ?><br><?php echo $contact_no ?></td>
+                          <td><?php echo $address?><br>ZIP:<?php echo $zip_code?><br><?php echo $country ?></td>
+                          <td><?php echo $details ?></td>
+                          <td><?php echo $quantity ?></td>
+                          <td><?php echo $time ?></td>
+                          <td>
+                                <a class=' btn btn-danger' href="send_mail_.php?id=<?php echo $order_id?>">reply</a>
+                          </td>
+                          <td>
+                                <a class=' btn btn-danger' href="delete-order.php?id=<?php echo $order_id?>">Delete</a>
+                          </td>
+                          <td>
+                                <a class=' btn btn-success' href="update-order.php?id=<?php echo $order_id?>">Update</a>
+                          </td>
+                      </tr>
+                        <?php
                         }
                         ?>
                     </tbody>

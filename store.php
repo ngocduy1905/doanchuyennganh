@@ -123,7 +123,7 @@ include 'header.php';
 						<div class="col-md-12 col-xs-12" id="product_msg">
 					</div>
 							<!-- product -->
-							<div id="get_product">
+							<div id="get_product">				<!-- lấy sản phẩm -->
 							<!--Here we get product jquery Ajax Request-->
 						</div>
 							
@@ -131,7 +131,7 @@ include 'header.php';
 						</div>
 						<!-- /store products -->
 
-						<!-- store bottom filter -->
+						<!-- store bottom filter show ra 20 đến 100 sản phẩm-->
 						<div class="store-filter clearfix">
 							<span class="store-qty">Showing 20-100 products</span>
 							<ul class="store-pagination" id="pageno">

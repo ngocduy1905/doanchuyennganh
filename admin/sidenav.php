@@ -38,12 +38,6 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="adduser.php">
-              <i class="material-icons">person</i>
-              <p>Add User</p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a class="nav-link" href="userlist.php">
               <i class="material-icons">list</i>
               <p>User List</p>
@@ -77,7 +71,12 @@
             </a>
             
           </li>
-          
+          <li class="nav-item ">
+            <a class="nav-link" href="cartlist.php">
+              <i class="material-icons">library_books</i>
+              <p>Cart</p>
+            </a>
+          </li>
           <li class="nav-item ">
             <a class="nav-link" href="orders.php">
               <i class="material-icons">library_books</i>

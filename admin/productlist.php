@@ -58,17 +58,46 @@ include "topheader.php";
                       <?php 
 
                         $result=mysqli_query($con,"select product_id,product_image, product_title,product_price from products  where  product_cat=2 or product_cat=3 or product_cat=4 Limit $page1,12")or die ("query 1 incorrect.....");
+                        
+                        $sql = "select *from products";
 
-                        while(list($product_id,$image,$product_name,$price)=mysqli_fetch_array($result))
-                        {
-                        echo "<tr><td><img src='../product_images/$image' style='width:50px; height:50px; border:groove #000'></td><td>$product_name</td>
-                        <td>$price</td>
-                        <td>
+                        $res = mysqli_query($con, $sql);
 
-                        <a class=' btn btn-success' href='clothes_list.php?product_id=$product_id&action=delete'>Delete</a>
-                        </td></tr>";
-                        }
+                        
+                        
+                          if($res== true) {
 
+                          $count = mysqli_num_rows($res);
+
+                          $sn = 1;
+
+                          if($count >0) {
+
+                            while($rows = mysqli_fetch_assoc($res)) {
+
+                                $product_id = $rows['product_id'];
+                                $product_title = $rows['product_title'];
+                                $image = $rows['product_image'];
+                                $product_price= $rows['product_price'];
+                          ?>
+                          <tr>
+                            <td><?php echo $sn++ ?></td>
+                            <td><img src='../product_images/<?php echo $image;?>' style='width:50px; height:50px; border:groove #000'></td>
+                            <td><?php echo $product_title?></td>
+                            <td><?php echo $product_price?></td>
+                            <td>
+                                <a class=' btn btn-danger' href="delete-product.php?id=<?php echo $product_id?>">Delete</a>
+                            </td>
+                            <td>
+                                <a class=' btn btn-success' href="update-product.php?id=<?php echo $product_id?>">Update</a>
+                            </td>
+                          </tr>
+                        <?php
+                               }
+                              } else {
+    
+                              }
+                            }      
                         ?>
                     </tbody>
                   </table>

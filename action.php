@@ -45,6 +45,7 @@ if(isset($_POST["category"])){
 		echo "</div>";
 	}
 }
+//kiểm tra có thương hiệu thì mình lấy
 if(isset($_POST["brand"])){
 	$brand_query = "SELECT * FROM brands";
 	$run_query = mysqli_query($con,$brand_query);
@@ -53,6 +54,7 @@ if(isset($_POST["brand"])){
 							<h3 class='aside-title'>Brand</h3>
 							<div class='btn-group-vertical'>
 	";
+	//nếu có kết nối
 	if(mysqli_num_rows($run_query) > 0){
         $i=1;
 		while($row = mysqli_fetch_array($run_query)){
@@ -80,6 +82,7 @@ if(isset($_POST["brand"])){
 		echo "</div>";
 	}
 }
+//kiểm tra có trang thì mình lấy
 if(isset($_POST["page"])){
 	$sql = "SELECT * FROM products";
 	$run_query = mysqli_query($con,$sql);
@@ -93,6 +96,7 @@ if(isset($_POST["page"])){
 		";
 	}
 }
+//kiểm tra nếu có sản phẩm trả về thì mình lấy
 if(isset($_POST["getProduct"])){
 	$limit = 9;
 	if(isset($_POST["setPage"])){
@@ -153,7 +157,7 @@ if(isset($_POST["getProduct"])){
 	}
 }
 
-
+//kiểm tra nếu có chọn loại sản trả về thì mình lấy
 if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isset($_POST["search"])){
 	if(isset($_POST["get_seleted_Category"])){
 		$id = $_POST["cat_id"];
@@ -218,7 +222,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 	}
 	
 
-
+	//kiểm tra có sản phẩm trong giỏ hàng
 	if(isset($_POST["addToCart"])){
 		
 
@@ -283,13 +287,14 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 		
 	}
 
-//Count User cart item
+//Đếm mặt hàng trong giỏ hàng của Người dùng
 if (isset($_POST["count_item"])) {
-	//When user is logged in then we will count number of item in cart by using user session id
+	//Khi người dùng đăng nhập thì chúng tôi sẽ đếm số lượng mặt hàng trong giỏ hàng bằng cách sử dụng session id
 	if (isset($_SESSION["uid"])) {
 		$sql = "SELECT COUNT(*) AS count_item FROM cart WHERE user_id = $_SESSION[uid]";
 	}else{
-		//When user is not logged in then we will count number of item in cart by using users unique ip address
+		//Khi người dùng chưa đăng nhập thì chúng tôi sẽ đếm số lượng mặt hàng trong giỏ hàng bằng 
+		//cách sử dụng địa chỉ ip duy nhất của người dùng
 		$sql = "SELECT COUNT(*) AS count_item FROM cart WHERE ip_add = '$ip_add' AND user_id < 0";
 	}
 	
@@ -298,9 +303,9 @@ if (isset($_POST["count_item"])) {
 	echo $row["count_item"];
 	exit();
 }
-//Count User cart item
+//Đếm mặt hàng trong giỏ hàng của Người dùng
 
-//Get Cart Item From Database to Dropdown menu
+//Nhận mặt hàng trong giỏ hàng từ cơ sở dữ liệu đến menu thả xuống
 if (isset($_POST["Common"])) {
 
 	if (isset($_SESSION["uid"])) {
@@ -493,7 +498,7 @@ if (isset($_POST["Common"])) {
 	
 }
 
-//Remove Item From cart
+//Xóa mặt hàng khỏi giỏ hàng
 if (isset($_POST["removeItemFromCart"])) {
 	$remove_id = $_POST["rid"];
 	if (isset($_SESSION["uid"])) {
@@ -511,7 +516,7 @@ if (isset($_POST["removeItemFromCart"])) {
 }
 
 
-//Update Item From cart
+//Cập nhật mặt hàng từ giỏ hàng
 if (isset($_POST["updateCartItem"])) {
 	$update_id = $_POST["update_id"];
 	$qty = $_POST["qty"];
@@ -533,9 +538,6 @@ if (isset($_POST["updateCartItem"])) {
 
 
 ?>
-
-
-
 
 
 

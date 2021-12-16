@@ -5,7 +5,7 @@
         <div id="newsletter" class="section">
 			<!-- container -->
 			<div class="container">
-				<!-- row -->
+				<!-- row nhập email để đăng ký-->
 				<div class="row">
 					<div class="col-md-12">
 					
@@ -16,7 +16,7 @@
 								<button class="newsletter-btn" value="Sign Up" name="signup_button" type="submit"><i class="fa fa-envelope"></i> Subscribe</button>
 							</form>
 							<div class="" id="offer_msg">
-                                <!--Alert from signup form-->
+                                <!--Alert from signup form - kết nối facebook ,.. -->
                             </div>
 							<ul class="newsletter-follow">
 								<li>

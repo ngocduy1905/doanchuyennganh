@@ -91,7 +91,8 @@ span.price {
   color: grey;
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+/* Responsive layout - khi màn hình có chiều rộng dưới 800px, hãy đặt hai cột chồng lên nhau
+thay vì ở cạnh nhau (cũng thay đổi hướng - đặt cột "giỏ hàng" lên trên cùng) */
 @media (max-width: 800px) {
   .row-checkout {
     flex-direction: column-reverse;

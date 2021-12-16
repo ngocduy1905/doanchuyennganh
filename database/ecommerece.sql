@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 14, 2021 at 02:05 PM
+-- Generation Time: Dec 14, 2021 at 02:24 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.4.9
 
@@ -64,7 +64,8 @@ DROP TABLE IF EXISTS `brands`;
 CREATE TABLE IF NOT EXISTS `brands` (
   `brand_id` int(100) NOT NULL AUTO_INCREMENT,
   `brand_title` text CHARACTER SET latin1 NOT NULL,
-  PRIMARY KEY (`brand_id`)
+  PRIMARY KEY (`brand_id`),
+  KEY `brand_id` (`brand_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -91,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `user_id` int(10) DEFAULT NULL,
   `qty` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `cart`
@@ -126,7 +127,8 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `cat_id` int(100) NOT NULL AUTO_INCREMENT,
   `cat_title` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
-  PRIMARY KEY (`cat_id`)
+  PRIMARY KEY (`cat_id`),
+  KEY `cat_id` (`cat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
@@ -192,7 +194,16 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `trx_id` varchar(255) CHARACTER SET latin1 NOT NULL,
   `p_status` varchar(20) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `qty`, `trx_id`, `p_status`) VALUES
+(1, 1, 86, 1, 'nhb', 'nhn'),
+(2, 1, 86, 1, 'hyygb', 'ok'),
+(3, 1, 86, 1, 'njn', 'ok');
 
 -- --------------------------------------------------------
 
@@ -218,7 +229,18 @@ CREATE TABLE IF NOT EXISTS `orders_info` (
   `cvv` int(5) NOT NULL,
   PRIMARY KEY (`order_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `orders_info`
+--
+
+INSERT INTO `orders_info` (`order_id`, `user_id`, `f_name`, `email`, `address`, `city`, `state`, `zip`, `cardname`, `cardnumber`, `expdate`, `prod_count`, `total_amt`, `cvv`) VALUES
+(1, 1, 'Ban Tran', 'bant835@gmail.com', 'TP.HCM', 'TPHCM', 'demo', 505284, 'demo', '151054848048084', '12/12', 2, 7000, 588),
+(2, 1, 'Ban Tran', 'bant835@gmail.com', 'TP.HCM', 'TPHCM', 'demo', 505284, 'demo', '2084585084580458', '10/10', 2, 4000, 205),
+(3, 1, 'Ban Tran', 'bant835@gmail.com', 'TP.HCM', 'TPHCM', 'demo', 505284, 'demo', '2558252525252525', '12/10', 2, 7000, 10),
+(4, 1, 'Ban Tran', 'bant835@gmail.com', 'TP.HCM', 'TPHCM', 'demo', 505284, 'demo', '20480584507847', '10/10', 1, 5000, 4),
+(5, 1, 'Ban Tran', 'bant835@gmail.com', 'TP.HCM', 'TPHCM', 'demo', 505284, 'demo', '4804 8048 74', '10/11', 1, 5000, 47);
 
 -- --------------------------------------------------------
 
@@ -236,7 +258,21 @@ CREATE TABLE IF NOT EXISTS `order_products` (
   PRIMARY KEY (`order_pro_id`),
   KEY `order_products` (`order_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `order_products`
+--
+
+INSERT INTO `order_products` (`order_pro_id`, `order_id`, `product_id`, `qty`, `amt`) VALUES
+(1, 1, 86, 1, 5000),
+(2, 1, 87, 1, 2000),
+(3, 2, 87, 1, 2000),
+(4, 2, 87, 1, 2000),
+(5, 3, 86, 1, 5000),
+(6, 3, 87, 1, 2000),
+(7, 4, 86, 1, 5000),
+(8, 5, 86, 1, 5000);
 
 -- --------------------------------------------------------
 
@@ -259,8 +295,10 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_quantity` int(11) NOT NULL,
   `product_made_in` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
   `product_import_date` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+  PRIMARY KEY (`product_id`),
+  KEY `product_cat` (`product_cat`),
+  KEY `product_brand` (`product_brand`)
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `products`
@@ -274,7 +312,9 @@ INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_t
 (90, 6, 2, 'Ã¡o sÆ¡ mi nam', 5000, 'Ã¡o sÆ¡ mi nam', '1636897824_pm3.jpg', 'Ã¡o sÆ¡ mi nam', 'xanh', 'M', 2, 'thailan', '2020-01-02'),
 (91, 7, 1, 'Ã¡o thun nam', 3000, 'Ã¡o thun nam', '1636898031_AP-2792N-0CA00-250K-500x500.jpg', 'Ã¡o thun nam', 'vÃ ng', 'M', 2, 'thailan', '2020-01-01'),
 (92, 1, 1, 'vÃ¡y', 3000, 'vÃ¡y ná»¯', '1636898528_red dress.jpg', 'vÃ¡y ná»¯', 'Ä‘á»', 'M', 1, 'thailan', '2020-01-01'),
-(93, 2, 1, 'vÃ¡y', 2000, 'vÃ¡y ná»¯', '1636898627_girl-walking.jpg', 'vÃ¡y ná»¯', 'vÃ ng', 'M', 2, 'thailan', '2019-02-02');
+(93, 2, 1, 'vÃ¡y', 2000, 'vÃ¡y ná»¯', '1636898627_girl-walking.jpg', 'vÃ¡y ná»¯', 'vÃ ng', 'M', 2, 'thailan', '2019-02-02'),
+(95, 5, 2, 'ao vest', 5000, 'ao vest nam', '1639447766_pm11.jpg', 'ao vest nam', 'Ä‘en', 'M', 1, 'thailan', '2020-01-02'),
+(96, 5, 1, 'ao vest nam', 3000, 'ao vest nam', '1639448577_ms3.jpg', 'ao vest nam', 'Ä‘en', 'M', 1, 'thailan', '2020-01-01');
 
 -- --------------------------------------------------------
 
@@ -355,6 +395,13 @@ ALTER TABLE `orders_info`
 ALTER TABLE `order_products`
   ADD CONSTRAINT `order_products` FOREIGN KEY (`order_id`) REFERENCES `orders_info` (`order_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `FK_product_brands` FOREIGN KEY (`product_brand`) REFERENCES `brands` (`brand_id`),
+  ADD CONSTRAINT `FK_product_categories` FOREIGN KEY (`product_cat`) REFERENCES `categories` (`cat_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
